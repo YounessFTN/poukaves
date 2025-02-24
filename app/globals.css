@@ -5,6 +5,8 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --border: #e5e7eb; /* Ajoute une couleur de bordure par défaut */
+  --ring: 59, 130, 246; /* Couleur de l'anneau (tailwind blue-500 par exemple) */
 }
 
 @media (prefers-color-scheme: dark) {
