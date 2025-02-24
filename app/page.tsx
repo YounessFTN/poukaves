@@ -11,10 +11,11 @@ import {
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
+import { Menu } from "lucide-react";
 
 export default function Home() {
   return (
-    <div className="p-4 ml-44 mr-44 flex justify-items-center  min-h-screen flex-col">
+    <div className="p-4 flex justify-items-center flex-col min-h-screen">
       <DotPattern
         glow
         className={cn(
@@ -24,42 +25,49 @@ export default function Home() {
 
       {/* Header */}
       <header className="bg-background sticky top-0 z-50 w-full border-b">
-        <div className="container flex h-16 items-center justify-between">
+        <div className="container flex items-center justify-between p-4">
           <div className="flex items-center gap-2">
-            <h1 className="text-2xl font-bold">Poukave</h1>
+            <h1 className="text-xl font-bold">Poukave</h1>
           </div>
-          <nav className="flex items-center gap-4">
-            <Button variant="ghost" size="sm">
-              Accueil
+          <div className="flex items-center gap-2">
+            {/* Menu burger pour mobile */}
+            <Button variant="ghost" size="sm" className="lg:hidden">
+              <Menu />
             </Button>
-            <Button variant="ghost" size="sm">
-              Analyse
-            </Button>
-            <Button variant="ghost" size="sm">
-              À propos
-            </Button>
-            <ShimmerButton className="shadow-2xl">
-              <span className="whitespace-pre-wrap text-center text-s font-medium leading-none tracking-tight text-white dark:from-white dark:to-slate-900/10 lg:text-s">
-                Dénoncer
-              </span>
-            </ShimmerButton>
-          </nav>
+
+            {/* Navigation */}
+            <nav className="hidden lg:flex items-center gap-2">
+              <Button variant="ghost" size="sm">
+                Accueil
+              </Button>
+              <Button variant="ghost" size="sm">
+                Analyse
+              </Button>
+              <Button variant="ghost" size="sm">
+                À propos
+              </Button>
+              <ShimmerButton className="shadow-2xl">
+                <span className="whitespace-pre-wrap text-center text-xs font-medium leading-none tracking-tight text-white dark:from-white dark:to-slate-900/10 lg:text-xs">
+                  Dénoncer
+                </span>
+              </ShimmerButton>
+            </nav>
+          </div>
         </div>
       </header>
 
       {/* Hero Section */}
-      <section className="container py-24 sm:py-32 space-y-8 md:space-y-12">
-        <div className="max-w-3xl mx-auto text-center">
-          Plateforme de Dénonciation Civique
-          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
+      <section className="container py-12 sm:py-16 space-y-6 md:space-y-8">
+        <div className="max-w-xl mx-auto text-center">
+          <h2 className="text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl">
             Poukave - Signalez pour un avenir meilleur
-          </h1>
-          <p className="mt-6 text-xl text-muted-foreground">
+          </h2>
+          <p className="mt-4 text-lg text-muted-foreground">
             Une plateforme anonyme et sécurisée pour signaler les problèmes
             sociaux, environnementaux et civiques qui affectent notre
             communauté.
           </p>
-          <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg">Faire un signalement</Button>
             <Button size="lg" variant="outline">
               Voir les analyses
@@ -69,8 +77,8 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section className="container py-16 md:py-24">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+      <section className="container py-8 md:py-12">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {[
             {
               title: "Anonymat Garanti",
@@ -118,12 +126,12 @@ export default function Home() {
       </section>
 
       {/* Tabs Section */}
-      <section className="container py-16 md:py-24">
-        <h2 className="text-3xl font-bold tracking-tight text-center mb-12">
+      <section className="container py-8 md:py-12">
+        <h2 className="text-2xl font-bold tracking-tight text-center mb-8">
           Comment utiliser Poukave
         </h2>
-        <Tabs defaultValue="signaler" className="max-w-3xl mx-auto">
-          <TabsList className="grid w-full grid-cols-3">
+        <Tabs defaultValue="signaler" className="max-w-xl mx-auto">
+          <TabsList className="grid w-full grid-cols-1 sm:grid-cols-3">
             <TabsTrigger value="signaler">Signaler</TabsTrigger>
             <TabsTrigger value="categories">Catégories</TabsTrigger>
             <TabsTrigger value="analyse">Analyse</TabsTrigger>
@@ -154,7 +162,7 @@ export default function Home() {
             <TabsContent
               key={tab.value}
               value={tab.value}
-              className="mt-6 p-6 border rounded-lg"
+              className="mt-4 p-4 border rounded-lg"
             >
               <h3 className="text-lg font-medium mb-2">{tab.title}</h3>
               <p className="text-muted-foreground mb-4">{tab.description}</p>
@@ -165,13 +173,13 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-muted py-16 md:py-24">
+      <section className="bg-muted py-8 md:py-12">
         <div className="container">
-          <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-3xl font-bold tracking-tight mb-4">
+          <div className="max-w-lg mx-auto text-center">
+            <h2 className="text-2xl font-bold tracking-tight mb-4">
               Ensemble, créons une communauté plus transparente
             </h2>
-            <p className="text-muted-foreground mb-8">
+            <p className="text-muted-foreground mb-6">
               Votre vigilance et vos signalements sont essentiels pour améliorer
               notre société. Rejoignez notre mouvement pour plus de transparence
               et de responsabilité.
@@ -188,12 +196,12 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="bg-background border-t mt-auto">
-        <div className="container py-8">
+        <div className="container py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="flex items-center gap-2">
               <h2 className="font-bold">Poukave</h2>
             </div>
-            <div className="flex gap-6">
+            <div className="flex gap-4">
               {[
                 "Confidentialité",
                 "Conditions d'utilisation",
