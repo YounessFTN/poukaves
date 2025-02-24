@@ -16,6 +16,9 @@ export const metadata = {
   title: "Poukave - Signaler pour un avenir meilleur",
   description:
     "Plateforme anonyme et sécurisée pour signaler des problèmes sociaux, environnementaux et civiques.",
+  icons: {
+    icon: "/logo-poukave.svg", // Remplace par le bon chemin vers ton fichier
+  },
 };
 
 /**
