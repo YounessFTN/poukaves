@@ -1,3 +1,5 @@
+import { DotPattern } from "@/components/magicui/dot-pattern";
+import { ShimmerButton } from "@/components/magicui/shimmer-button";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -8,21 +10,18 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-
-import { DotPattern } from "@/components/magicui/dot-pattern";
-import { ShimmerButton } from "@/components/magicui/shimmer-button";
-import { TextAnimate } from "@/components/magicui/text-animate";
 import { cn } from "@/lib/utils";
 
 export default function Home() {
   return (
-    <div className="p-4 flex min-h-screen flex-col">
+    <div className="p-4 ml-44 mr-44 flex justify-items-center  min-h-screen flex-col">
       <DotPattern
-        glow={true}
+        glow
         className={cn(
           "[mask-image:radial-gradient(300px_circle_at_center,white,transparent)]"
         )}
       />
+
       {/* Header */}
       <header className="bg-background sticky top-0 z-50 w-full border-b">
         <div className="container flex h-16 items-center justify-between">
@@ -51,13 +50,9 @@ export default function Home() {
       {/* Hero Section */}
       <section className="container py-24 sm:py-32 space-y-8 md:space-y-12">
         <div className="max-w-3xl mx-auto text-center">
-          <TextAnimate animation="blurInUp" by="character" once>
-            Plateforme de Dénonciation Civique
-          </TextAnimate>
+          Plateforme de Dénonciation Civique
           <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-            <TextAnimate animation="blurInUp" by="character" once>
-              Poukave - Signalez pour un avenir meilleur
-            </TextAnimate>
+            Poukave - Signalez pour un avenir meilleur
           </h1>
           <p className="mt-6 text-xl text-muted-foreground">
             Une plateforme anonyme et sécurisée pour signaler les problèmes
@@ -76,66 +71,49 @@ export default function Home() {
       {/* Features Section */}
       <section className="container py-16 md:py-24">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-          <Card>
-            <CardHeader>
-              <CardTitle>Anonymat Garanti</CardTitle>
-              <CardDescription>
-                Signalez en toute confidentialité sans crainte de représailles.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground">
-                Notre plateforme est conçue pour protéger votre identité tout en
-                permettant de transmettre des informations cruciales.
-              </p>
-            </CardContent>
-            <CardFooter>
-              <Button variant="outline" size="sm">
-                En savoir plus
-              </Button>
-            </CardFooter>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Impact Concret</CardTitle>
-              <CardDescription>
-                Vos signalements contribuent à des changements réels.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground">
-                Grâce à la visualisation des données et à la transparence, les
-                autorités peuvent agir efficacement sur les problèmes signalés.
-              </p>
-            </CardContent>
-            <CardFooter>
-              <Button variant="outline" size="sm">
-                Voir les résultats
-              </Button>
-            </CardFooter>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Facilité d&apos;Utilisation</CardTitle>
-              <CardDescription>
-                Un processus simple et rapide pour soumettre vos signalements.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground">
-                Notre formulaire intuitif vous permet de déposer un signalement
-                en quelques minutes, avec la possibilité d&apos;ajouter des
-                détails précis.
-              </p>
-            </CardContent>
-            <CardFooter>
-              <Button variant="outline" size="sm">
-                Comment ça marche
-              </Button>
-            </CardFooter>
-          </Card>
+          {[
+            {
+              title: "Anonymat Garanti",
+              description:
+                "Signalez en toute confidentialité sans crainte de représailles.",
+              content:
+                "Notre plateforme est conçue pour protéger votre identité tout en permettant de transmettre des informations cruciales.",
+              buttonText: "En savoir plus",
+            },
+            {
+              title: "Impact Concret",
+              description:
+                "Vos signalements contribuent à des changements réels.",
+              content:
+                "Grâce à la visualisation des données et à la transparence, les autorités peuvent agir efficacement sur les problèmes signalés.",
+              buttonText: "Voir les résultats",
+            },
+            {
+              title: "Facilité d'Utilisation",
+              description:
+                "Un processus simple et rapide pour soumettre vos signalements.",
+              content:
+                "Notre formulaire intuitif vous permet de déposer un signalement en quelques minutes, avec la possibilité d'ajouter des détails précis.",
+              buttonText: "Comment ça marche",
+            },
+          ].map((feature, index) => (
+            <Card key={index}>
+              <CardHeader>
+                <CardTitle>{feature.title}</CardTitle>
+                <CardDescription>{feature.description}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                  {feature.content}
+                </p>
+              </CardContent>
+              <CardFooter>
+                <Button variant="outline" size="sm">
+                  {feature.buttonText}
+                </Button>
+              </CardFooter>
+            </Card>
+          ))}
         </div>
       </section>
 
@@ -150,40 +128,39 @@ export default function Home() {
             <TabsTrigger value="categories">Catégories</TabsTrigger>
             <TabsTrigger value="analyse">Analyse</TabsTrigger>
           </TabsList>
-          <TabsContent value="signaler" className="mt-6 p-6 border rounded-lg">
-            <h3 className="text-lg font-medium mb-2">
-              Comment faire un signalement
-            </h3>
-            <p className="text-muted-foreground mb-4">
-              Cliquez sur le bouton &quot;Dénoncer&quot;, remplissez le
-              formulaire avec une description du problème, sa catégorie et sa
-              localisation, puis soumettez-le de manière anonyme.
-            </p>
-            <Button>Faire un signalement maintenant</Button>
-          </TabsContent>
-          <TabsContent
-            value="categories"
-            className="mt-6 p-6 border rounded-lg"
-          >
-            <h3 className="text-lg font-medium mb-2">
-              Nos catégories de signalement
-            </h3>
-            <p className="text-muted-foreground mb-4">
-              Fraude, corruption, pollution environnementale, problèmes
-              d&apos;infrastructure, incivilités, et bien plus. Choisissez la
-              catégorie qui correspond le mieux au problème.
-            </p>
-            <Button>Voir toutes les catégories</Button>
-          </TabsContent>
-          <TabsContent value="analyse" className="mt-6 p-6 border rounded-lg">
-            <h3 className="text-lg font-medium mb-2">Comprendre les données</h3>
-            <p className="text-muted-foreground mb-4">
-              Consultez notre page d&apos;analyse pour voir les statistiques, la
-              répartition par catégorie, et les zones géographiques les plus
-              signalées. Des graphiques interactifs sont disponibles.
-            </p>
-            <Button>Consulter les analyses</Button>
-          </TabsContent>
+          {[
+            {
+              value: "signaler",
+              title: "Comment faire un signalement",
+              description:
+                "Cliquez sur le bouton 'Dénoncer', remplissez le formulaire avec une description du problème, sa catégorie et sa localisation, puis soumettez-le de manière anonyme.",
+              buttonText: "Faire un signalement maintenant",
+            },
+            {
+              value: "categories",
+              title: "Nos catégories de signalement",
+              description:
+                "Fraude, corruption, pollution environnementale, problèmes d'infrastructure, incivilités, et bien plus. Choisissez la catégorie qui correspond le mieux au problème.",
+              buttonText: "Voir toutes les catégories",
+            },
+            {
+              value: "analyse",
+              title: "Comprendre les données",
+              description:
+                "Consultez notre page d'analyse pour voir les statistiques, la répartition par catégorie, et les zones géographiques les plus signalées. Des graphiques interactifs sont disponibles.",
+              buttonText: "Consulter les analyses",
+            },
+          ].map((tab) => (
+            <TabsContent
+              key={tab.value}
+              value={tab.value}
+              className="mt-6 p-6 border rounded-lg"
+            >
+              <h3 className="text-lg font-medium mb-2">{tab.title}</h3>
+              <p className="text-muted-foreground mb-4">{tab.description}</p>
+              <Button>{tab.buttonText}</Button>
+            </TabsContent>
+          ))}
         </Tabs>
       </section>
 
@@ -217,30 +194,20 @@ export default function Home() {
               <h2 className="font-bold">Poukave</h2>
             </div>
             <div className="flex gap-6">
-              <a
-                href="#"
-                className="text-sm text-muted-foreground hover:underline"
-              >
-                Confidentialité
-              </a>
-              <a
-                href="#"
-                className="text-sm text-muted-foreground hover:underline"
-              >
-                Conditions d&apos;utilisation
-              </a>
-              <a
-                href="#"
-                className="text-sm text-muted-foreground hover:underline"
-              >
-                FAQ
-              </a>
-              <a
-                href="#"
-                className="text-sm text-muted-foreground hover:underline"
-              >
-                Contact
-              </a>
+              {[
+                "Confidentialité",
+                "Conditions d'utilisation",
+                "FAQ",
+                "Contact",
+              ].map((link, index) => (
+                <a
+                  key={index}
+                  href="#"
+                  className="text-sm text-muted-foreground hover:underline"
+                >
+                  {link}
+                </a>
+              ))}
             </div>
             <p className="text-sm text-muted-foreground">
               © 2025 Poukave. Tous droits réservés.
