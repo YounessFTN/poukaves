@@ -12,6 +12,7 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 import { Menu } from "lucide-react";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -37,20 +38,16 @@ export default function Home() {
 
             {/* Navigation */}
             <nav className="hidden lg:flex items-center gap-2">
-              <Button variant="ghost" size="sm">
-                Accueil
-              </Button>
-              <Button variant="ghost" size="sm">
-                Analyse
-              </Button>
-              <Button variant="ghost" size="sm">
-                À propos
-              </Button>
-              <ShimmerButton className="shadow-2xl">
-                <span className="whitespace-pre-wrap text-center text-xs font-medium leading-none tracking-tight text-white dark:from-white dark:to-slate-900/10 lg:text-xs">
-                  Dénoncer
-                </span>
-              </ShimmerButton>
+              <Button variant="ghost" size="sm">Accueil</Button>
+              <Button variant="ghost" size="sm">Analyse</Button>
+              <Button variant="ghost" size="sm">À propos</Button>
+              <Link href="/denoncer">
+                <ShimmerButton className="shadow-2xl">
+                  <span className="whitespace-pre-wrap text-center text-xs font-medium leading-none tracking-tight text-white dark:from-white dark:to-slate-900/10 lg:text-xs">
+                    Dénoncer
+                  </span>
+                </ShimmerButton>
+              </Link>
             </nav>
           </div>
         </div>
