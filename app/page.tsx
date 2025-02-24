@@ -24,7 +24,7 @@ export default function Home() {
       />
 
       {/* Header */}
-      <header className="bg-background sticky top-0 z-50 w-full border-b">
+      <header className="bg-background place-content-between flex justify-items-center flex-col sticky top-0 z-50 w-full border-b">
         <div className="container flex items-center justify-between p-4">
           <div className="flex items-center gap-2">
             <h1 className="text-xl font-bold">Poukave</h1>
@@ -57,7 +57,7 @@ export default function Home() {
       </header>
 
       {/* Hero Section */}
-      <section className="container py-12 sm:py-16 space-y-6 md:space-y-8">
+      <section className=" place-content-between flex justify-items-center flex-col container py-12 sm:py-16 space-y-6 md:space-y-8">
         <div className="max-w-xl mx-auto text-center">
           <h2 className="text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl">
             Poukave - Signalez pour un avenir meilleur
@@ -77,7 +77,7 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section className="container py-8 md:py-12">
+      <section className=" place-content-between flex justify-items-center flex-col container py-8 md:py-12">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {[
             {
@@ -126,7 +126,7 @@ export default function Home() {
       </section>
 
       {/* Tabs Section */}
-      <section className="container py-8 md:py-12">
+      <section className=" place-content-between flex justify-items-center flex-col container py-8 md:py-12">
         <h2 className="text-2xl font-bold tracking-tight text-center mb-8">
           Comment utiliser Poukave
         </h2>
@@ -173,7 +173,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-muted py-8 md:py-12">
+      <section className=" place-content-between flex justify-items-center flex-col bg-muted py-8 md:py-12">
         <div className="container">
           <div className="max-w-lg mx-auto text-center">
             <h2 className="text-2xl font-bold tracking-tight mb-4">
@@ -195,7 +195,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-background border-t mt-auto">
+      <footer className=" place-content-between flex justify-items-center flex-col bg-background border-t mt-auto">
         <div className="container py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="flex items-center gap-2">
