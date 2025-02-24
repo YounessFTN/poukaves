@@ -8,25 +8,11 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import Image from "next/image";
 
 import { DotPattern } from "@/components/magicui/dot-pattern";
 import { ShimmerButton } from "@/components/magicui/shimmer-button";
 import { TextAnimate } from "@/components/magicui/text-animate";
 import { cn } from "@/lib/utils";
-
-export function DotPatternDemo() {
-  return (
-    <div className="relative flex h-[500px] w-full flex-col items-center justify-center overflow-hidden rounded-lg border bg-background">
-      <DotPattern
-        glow={true}
-        className={cn(
-          "[mask-image:radial-gradient(300px_circle_at_center,white,transparent)]"
-        )}
-      />
-    </div>
-  );
-}
 
 export default function Home() {
   return (
@@ -41,20 +27,14 @@ export default function Home() {
       <header className="bg-background sticky top-0 z-50 w-full border-b">
         <div className="container flex h-16 items-center justify-between">
           <div className="flex items-center gap-2">
-            <Image
-              src="/next.svg"
-              alt="Next.js Logo"
-              width={120}
-              height={30}
-              priority
-            />
+            <h1 className="text-2xl font-bold">Poukave</h1>
           </div>
           <nav className="flex items-center gap-4">
             <Button variant="ghost" size="sm">
-              Documentation
+              Accueil
             </Button>
             <Button variant="ghost" size="sm">
-              Tutoriels
+              Analyse
             </Button>
             <Button variant="ghost" size="sm">
               À propos
@@ -72,151 +52,155 @@ export default function Home() {
       <section className="container py-24 sm:py-32 space-y-8 md:space-y-12">
         <div className="max-w-3xl mx-auto text-center">
           <TextAnimate animation="blurInUp" by="character" once>
-            Blur in by character
+            Plateforme de Dénonciation Civique
           </TextAnimate>
           <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
             <TextAnimate animation="blurInUp" by="character" once>
-              Votre projet Next.js avec shadcn/ui
+              Poukave - Signalez pour un avenir meilleur
             </TextAnimate>
           </h1>
           <p className="mt-6 text-xl text-muted-foreground">
-            Une page d&apos;accueil moderne, responsive et intuitive pour
-            démarrer votre projet.
+            Une plateforme anonyme et sécurisée pour signaler les problèmes
+            sociaux, environnementaux et civiques qui affectent notre
+            communauté.
           </p>
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg">Commencer</Button>
+            <Button size="lg">Faire un signalement</Button>
             <Button size="lg" variant="outline">
-              En savoir plus
+              Voir les analyses
             </Button>
           </div>
         </div>
       </section>
-      {/* Features Section */}
 
+      {/* Features Section */}
       <section className="container py-16 md:py-24">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           <Card>
             <CardHeader>
-              <CardTitle>Composants Réutilisables</CardTitle>
+              <CardTitle>Anonymat Garanti</CardTitle>
               <CardDescription>
-                Créez des interfaces utilisateur modernes avec des composants
-                prédéfinis.
+                Signalez en toute confidentialité sans crainte de représailles.
               </CardDescription>
             </CardHeader>
             <CardContent>
               <p className="text-sm text-muted-foreground">
-                shadcn/ui offre une collection de composants accessibles et
-                personnalisables.
+                Notre plateforme est conçue pour protéger votre identité tout en
+                permettant de transmettre des informations cruciales.
               </p>
             </CardContent>
             <CardFooter>
               <Button variant="outline" size="sm">
-                Explorer les composants
+                En savoir plus
               </Button>
             </CardFooter>
           </Card>
 
           <Card>
             <CardHeader>
-              <CardTitle>Performance Optimale</CardTitle>
+              <CardTitle>Impact Concret</CardTitle>
               <CardDescription>
-                Profitez des optimisations automatiques de Next.js.
+                Vos signalements contribuent à des changements réels.
               </CardDescription>
             </CardHeader>
             <CardContent>
               <p className="text-sm text-muted-foreground">
-                Bénéficiez du rendu côté serveur, de la génération statique et
-                de l&apos;optimisation des images.
+                Grâce à la visualisation des données et à la transparence, les
+                autorités peuvent agir efficacement sur les problèmes signalés.
               </p>
             </CardContent>
             <CardFooter>
               <Button variant="outline" size="sm">
-                Voir les performances
+                Voir les résultats
               </Button>
             </CardFooter>
           </Card>
 
           <Card>
             <CardHeader>
-              <CardTitle>Personnalisation Facile</CardTitle>
+              <CardTitle>Facilité d&apos;Utilisation</CardTitle>
               <CardDescription>
-                Adaptez le design à votre marque sans effort.
+                Un processus simple et rapide pour soumettre vos signalements.
               </CardDescription>
             </CardHeader>
             <CardContent>
               <p className="text-sm text-muted-foreground">
-                Les composants shadcn/ui sont conçus pour être personnalisables
-                selon vos besoins.
+                Notre formulaire intuitif vous permet de déposer un signalement
+                en quelques minutes, avec la possibilité d&apos;ajouter des
+                détails précis.
               </p>
             </CardContent>
             <CardFooter>
               <Button variant="outline" size="sm">
-                Voir le guide
+                Comment ça marche
               </Button>
             </CardFooter>
           </Card>
         </div>
       </section>
+
       {/* Tabs Section */}
       <section className="container py-16 md:py-24">
         <h2 className="text-3xl font-bold tracking-tight text-center mb-12">
-          Découvrez les possibilités
+          Comment utiliser Poukave
         </h2>
-        <Tabs defaultValue="commencer" className="max-w-3xl mx-auto">
+        <Tabs defaultValue="signaler" className="max-w-3xl mx-auto">
           <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="commencer">Commencer</TabsTrigger>
-            <TabsTrigger value="installer">Installation</TabsTrigger>
-            <TabsTrigger value="deployer">Déploiement</TabsTrigger>
+            <TabsTrigger value="signaler">Signaler</TabsTrigger>
+            <TabsTrigger value="categories">Catégories</TabsTrigger>
+            <TabsTrigger value="analyse">Analyse</TabsTrigger>
           </TabsList>
-          <TabsContent value="commencer" className="mt-6 p-6 border rounded-lg">
-            <h3 className="text-lg font-medium mb-2">Premiers pas</h3>
+          <TabsContent value="signaler" className="mt-6 p-6 border rounded-lg">
+            <h3 className="text-lg font-medium mb-2">
+              Comment faire un signalement
+            </h3>
             <p className="text-muted-foreground mb-4">
-              Modifiez{" "}
-              <code className="bg-muted px-1 py-0.5 rounded">app/page.tsx</code>{" "}
-              pour commencer à personnaliser votre application.
+              Cliquez sur le bouton &quot;Dénoncer&quot;, remplissez le
+              formulaire avec une description du problème, sa catégorie et sa
+              localisation, puis soumettez-le de manière anonyme.
             </p>
-            <Button>Voir la documentation</Button>
+            <Button>Faire un signalement maintenant</Button>
           </TabsContent>
-          <TabsContent value="installer" className="mt-6 p-6 border rounded-lg">
-            <h3 className="text-lg font-medium mb-2">Installation rapide</h3>
+          <TabsContent
+            value="categories"
+            className="mt-6 p-6 border rounded-lg"
+          >
+            <h3 className="text-lg font-medium mb-2">
+              Nos catégories de signalement
+            </h3>
             <p className="text-muted-foreground mb-4">
-              Installez les dépendances et configurez votre environnement de
-              développement en quelques étapes.
+              Fraude, corruption, pollution environnementale, problèmes
+              d&apos;infrastructure, incivilités, et bien plus. Choisissez la
+              catégorie qui correspond le mieux au problème.
             </p>
-            <Button>Guide d&apos;installation</Button>
+            <Button>Voir toutes les catégories</Button>
           </TabsContent>
-          <TabsContent value="deployer" className="mt-6 p-6 border rounded-lg">
-            <h3 className="text-lg font-medium mb-2">Déployez facilement</h3>
+          <TabsContent value="analyse" className="mt-6 p-6 border rounded-lg">
+            <h3 className="text-lg font-medium mb-2">Comprendre les données</h3>
             <p className="text-muted-foreground mb-4">
-              Déployez votre application sur Vercel en quelques clics pour une
-              mise en ligne rapide.
+              Consultez notre page d&apos;analyse pour voir les statistiques, la
+              répartition par catégorie, et les zones géographiques les plus
+              signalées. Des graphiques interactifs sont disponibles.
             </p>
-            <Button>Déployer maintenant</Button>
+            <Button>Consulter les analyses</Button>
           </TabsContent>
         </Tabs>
       </section>
+
       {/* CTA Section */}
       <section className="bg-muted py-16 md:py-24">
         <div className="container">
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="text-3xl font-bold tracking-tight mb-4">
-              Prêt à commencer votre projet?
+              Ensemble, créons une communauté plus transparente
             </h2>
             <p className="text-muted-foreground mb-8">
-              Lancez-vous et créez une application web moderne avec Next.js et
-              shadcn/ui.
+              Votre vigilance et vos signalements sont essentiels pour améliorer
+              notre société. Rejoignez notre mouvement pour plus de transparence
+              et de responsabilité.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg">
-                <Image
-                  src="/vercel.svg"
-                  alt="Vercel Logo"
-                  width={16}
-                  height={16}
-                  className="mr-2 dark:invert"
-                />
-                Déployer sur Vercel
-              </Button>
+              <Button size="lg">Faire un signalement</Button>
               <Button size="lg" variant="outline">
                 Consulter les ressources
               </Button>
@@ -224,47 +208,42 @@ export default function Home() {
           </div>
         </div>
       </section>
+
       {/* Footer */}
       <footer className="bg-background border-t mt-auto">
         <div className="container py-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="flex items-center gap-2">
-              <Image
-                src="/next.svg"
-                alt="Next.js Logo"
-                width={80}
-                height={20}
-                className="dark:invert"
-              />
+              <h2 className="font-bold">Poukave</h2>
             </div>
             <div className="flex gap-6">
               <a
                 href="#"
                 className="text-sm text-muted-foreground hover:underline"
               >
-                Documentation
+                Confidentialité
               </a>
               <a
                 href="#"
                 className="text-sm text-muted-foreground hover:underline"
               >
-                Exemples
+                Conditions d&apos;utilisation
               </a>
               <a
                 href="#"
                 className="text-sm text-muted-foreground hover:underline"
               >
-                GitHub
+                FAQ
               </a>
               <a
                 href="#"
                 className="text-sm text-muted-foreground hover:underline"
               >
-                Support
+                Contact
               </a>
             </div>
             <p className="text-sm text-muted-foreground">
-              © 2025 Votre Projet. Tous droits réservés.
+              © 2025 Poukave. Tous droits réservés.
             </p>
           </div>
         </div>
