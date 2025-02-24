@@ -33,6 +33,12 @@ const RootLayout: FC<{ children: React.ReactNode }> = ({ children }) => {
     <html lang="fr">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
       >
         {children}
       </body>
