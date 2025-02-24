@@ -80,8 +80,8 @@ export default function Home() {
             </TextAnimate>
           </h1>
           <p className="mt-6 text-xl text-muted-foreground">
-            Une page d'accueil moderne, responsive et intuitive pour démarrer
-            votre projet.
+            Une page d&apos;accueil moderne, responsive et intuitive pour
+            démarrer votre projet.
           </p>
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg">Commencer</Button>
@@ -126,7 +126,7 @@ export default function Home() {
             <CardContent>
               <p className="text-sm text-muted-foreground">
                 Bénéficiez du rendu côté serveur, de la génération statique et
-                de l'optimisation des images.
+                de l&apos;optimisation des images.
               </p>
             </CardContent>
             <CardFooter>
@@ -183,7 +183,7 @@ export default function Home() {
               Installez les dépendances et configurez votre environnement de
               développement en quelques étapes.
             </p>
-            <Button>Guide d'installation</Button>
+            <Button>Guide d&apos;installation</Button>
           </TabsContent>
           <TabsContent value="deployer" className="mt-6 p-6 border rounded-lg">
             <h3 className="text-lg font-medium mb-2">Déployez facilement</h3>
