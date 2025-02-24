@@ -15,7 +15,7 @@ import { Menu } from "lucide-react";
 
 export default function Home() {
   return (
-    <div className="p-4 flex justify-items-center flex-col min-h-screen">
+    <div className="p-4 place-content-between flex justify-items-center flex-col min-h-screen">
       <DotPattern
         glow
         className={cn(
