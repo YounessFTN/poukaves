@@ -66,7 +66,7 @@ export default function Denoncer() {
 
       <main className="flex-grow p-4 flex flex-col items-center">
         <h1 className="text-4xl font-bold text-center mt-8">
-          {"Ça dénonce hein 😉"}
+          Ça dénonce hein 😉
         </h1>
 
         <motion.div
@@ -137,10 +137,110 @@ export default function Denoncer() {
                   required
                 />
               </div>
+              <div>
+                <label className="block font-bold mb-1">
+                  Date <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="date"
+                  name="date"
+                  value={formData.date}
+                  onChange={handleChange}
+                  className="w-full p-2 border border-gray-400 rounded-md focus:border-black focus:ring-black outline-none"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block font-bold mb-1">
+                  Heure <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="time"
+                  name="heure"
+                  value={formData.heure}
+                  onChange={handleChange}
+                  className="w-full p-2 border border-gray-400 rounded-md focus:border-black focus:ring-black outline-none"
+                  required
+                />
+              </div>
             </div>
+
+            <div>
+              <label className="block font-bold mb-1">
+                Description <span className="text-red-500">*</span>
+              </label>
+              <textarea
+                name="description"
+                value={formData.description}
+                onChange={handleChange}
+                className="w-full p-2 border border-gray-400 rounded-md focus:border-black focus:ring-black outline-none"
+                required
+              />
+            </div>
+
+            {/* Upload Pièces jointes */}
+            <div>
+              <label className="block font-bold mb-1">Pièces jointes</label>
+              <button
+                type="button"
+                className="p-2 border border-gray-400 rounded-md focus:border-black focus:ring-black outline-none"
+              >
+                Ajouter
+              </button>
+            </div>
+
+            <motion.button
+              type="submit"
+              className="w-full bg-black text-white p-3 rounded-md font-bold"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              DÉNONCERRRRR
+            </motion.button>
           </form>
         </motion.div>
+
+        {/* Texte en bas */}
+        <div className="mt-8 text-center text-gray-600 space-y-2">
+          <p>
+            🔒 <span className="font-semibold">Anonymat garanti</span> : Vos
+            signalements restent totalement anonymes et vos données sont
+            traitées avec la plus grande confidentialité.
+          </p>
+          <p>
+            🛡️ <span className="font-semibold">Sécurité renforcée</span> :
+            Toutes les informations sont cryptées et protégées pour assurer
+            votre tranquillité d&apos;esprit.
+          </p>
+        </div>
       </main>
+
+      <footer className="bg-background border-t mt-auto">
+        <div className="container py-6">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <h2 className="font-bold">Poukave</h2>
+            <div className="flex gap-4">
+              {[
+                "Confidentialité",
+                "Conditions d'utilisation",
+                "FAQ",
+                "Contact",
+              ].map((link, index) => (
+                <a
+                  key={index}
+                  href="#"
+                  className="text-sm text-muted-foreground hover:underline"
+                >
+                  {link}
+                </a>
+              ))}
+            </div>
+            <p className="text-sm text-muted-foreground">
+              © {new Date().getFullYear()} Poukave. Tous droits réservés.
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
