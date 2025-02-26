@@ -1,13 +1,9 @@
 "use client";
 
 import { DotPattern } from "@/components/magicui/dot-pattern";
-import { ShimmerButton } from "@/components/magicui/shimmer-button";
-import { Button } from "@/components/ui/button";
+import { NavBar } from "@/components/page/NavBar";
 import { motion } from "framer-motion";
-import { Menu } from "lucide-react";
-import Link from "next/link";
 import { useState } from "react";
-
 export default function Denoncer() {
   const [formData, setFormData] = useState({
     pseudonyme: "",
@@ -35,34 +31,7 @@ export default function Denoncer() {
         className="[mask-image:radial-gradient(300px_circle_at_center,white,transparent)]"
       />
 
-      <header className="bg-background sticky top-0 z-50 w-full border-b">
-        <div className="container flex items-center justify-between p-4">
-          <h1 className="text-xl font-bold">Poukave</h1>
-          <nav className="hidden lg:flex items-center gap-2">
-            <Link href="/">
-              <Button variant="ghost" size="sm">
-                Accueil
-              </Button>
-            </Link>
-            <Button variant="ghost" size="sm">
-              Analyse
-            </Button>
-            <Button variant="ghost" size="sm">
-              À propos
-            </Button>
-            <Link href="/denoncer">
-              <ShimmerButton className="shadow-2xl">
-                <span className="text-xs font-medium tracking-tight text-white lg:text-xs">
-                  Dénoncer
-                </span>
-              </ShimmerButton>
-            </Link>
-          </nav>
-          <Button variant="ghost" size="sm" className="lg:hidden">
-            <Menu />
-          </Button>
-        </div>
-      </header>
+      <NavBar />
 
       <main className="flex-grow p-4 flex flex-col items-center">
         <h1 className="text-4xl font-bold text-center mt-8">
