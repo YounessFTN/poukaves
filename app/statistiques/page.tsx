@@ -21,12 +21,14 @@ export default function Statistiques() {
   const [categoriesData, setCategoriesData] = useState([]);
   const [cityData, setCityData] = useState([]);
   const [evolutionData, setEvolutionData] = useState([]);
+  const [reports, setReports] = useState([]);
 
   useEffect(() => {
     fetch("https://express-poukave-api.vercel.app/denonciations")
       .then((response) => response.json())
       .then((data) => {
         setTotalReports(data.length);
+        setReports(data);
 
         const categoryMap = {};
         data.forEach((report) => {
@@ -119,45 +121,43 @@ export default function Statistiques() {
           </ResponsiveContainer>
         </div>
         <div className="w-full mt-8">
-          <h2 className="text-2xl font-bold text-center">
-            📍 Signalements par Ville
-          </h2>
-          <table className="table-auto w-full mt-4 border-collapse border border-gray-200">
-            <thead>
-              <tr className="bg-gray-100">
-                <th className="border px-4 py-2">Ville</th>
-                <th className="border px-4 py-2">Nombre de Signalements</th>
-              </tr>
-            </thead>
-            <tbody>
-              {cityData.map((item, index) => (
-                <tr key={index} className="text-center">
-                  <td className="border px-4 py-2">{item.ville}</td>
-                  <td className="border px-4 py-2">{item.signalements}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <div className="w-full mt-8">
-          <h2 className="text-2xl font-bold text-center">
-            📈 Évolution des Signalements
-          </h2>
+          <h2 className="text-2xl font-bold text-center">📈 Évolution des Signalements</h2>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={evolutionData}>
               <XAxis dataKey="mois" />
               <YAxis />
               <Tooltip />
-              <Line
-                type="monotone"
-                dataKey="signalements"
-                stroke="#FF5733"
-                strokeWidth={3}
-              />
+              <Line type="monotone" dataKey="signalements" stroke="#FF5733" strokeWidth={3} />
             </LineChart>
           </ResponsiveContainer>
         </div>
+        <div className="w-full mt-8">
+          <h2 className="text-2xl font-bold text-center">
+            📍 Détails des Signalements
+          </h2>
+          <table className="table-auto w-full mt-4 border-collapse border border-gray-200">
+            <thead>
+              <tr className="bg-gray-100">
+                <th className="border px-4 py-2">Ville</th>
+                <th className="border px-4 py-2">Catégorie</th>
+                <th className="border px-4 py-2">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              {reports.map((report, index) => (
+                <tr key={index} className="text-center">
+                  <td className="border px-4 py-2">{report.localisation}</td>
+                  <td className="border px-4 py-2">{report.categorie}</td>
+                  <td className="border px-4 py-2">{report.description}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </main>
+      <footer className="bg-background border-t mt-auto w-full py-6 px-6 text-center">
+        <p className="text-sm text-muted-foreground">© {new Date().getFullYear()} Poukave. Tous droits réservés.</p>
+      </footer>
     </div>
   );
 }
