@@ -75,7 +75,9 @@ export default function Denoncer() {
       <DotPattern className="[mask-image:radial-gradient(300px_circle_at_center,white,transparent)]" />
       <NavBar />
       <main className="flex-grow p-4 flex flex-col items-center">
-        <h1 className="text-4xl font-bold text-center mt-8">Ça dénonce hein 😉</h1>
+        <h1 className="text-4xl font-bold text-center mt-8">
+          Ça dénonce hein 😉
+        </h1>
         <motion.div
           className="w-full max-w-lg p-8 bg-white rounded-2xl shadow-lg mt-6 border border-gray-300"
           initial={{ opacity: 0, y: 20 }}
@@ -156,7 +158,9 @@ export default function Denoncer() {
               DÉNONCERRRRR
             </motion.button>
           </form>
-          {message && <p className="text-center mt-4 font-semibold">{message}</p>}
+          {message && (
+            <p className="text-center mt-4 font-semibold">{message}</p>
+          )}
         </motion.div>
       </main>
     </div>
