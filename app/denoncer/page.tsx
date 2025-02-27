@@ -4,6 +4,7 @@ import { DotPattern } from "@/components/magicui/dot-pattern";
 import { NavBar } from "@/components/page/NavBar";
 import { motion } from "framer-motion";
 import { useState } from "react";
+
 export default function Denoncer() {
   const [formData, setFormData] = useState({
     pseudonyme: "",
@@ -13,15 +14,61 @@ export default function Denoncer() {
     date: "",
     heure: "",
     description: "",
-    fichier: null,
   });
 
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+
   const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setMessage("");
+
+    const payload = {
+      name: formData.pseudonyme || "Anonyme",
+      categorie: formData.categorie,
+      localisation: formData.ville,
+      description: formData.description,
+      date: `${formData.date}T${formData.heure}:00.000Z`,
+      mots_cles: formData.motsCles.split(",").map((mot) => mot.trim()), // Transforme en tableau
+    };
+
+    try {
+      const response = await fetch("https://express-poukave-api.vercel.app/denonciations", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        throw new Error("Erreur lors de l'envoi du formulaire.");
+      }
+
+      const result = await response.json();
+      setMessage("Dénonciation envoyée avec succès !");
+      setFormData({
+        pseudonyme: "",
+        categorie: "",
+        ville: "",
+        motsCles: "",
+        date: "",
+        heure: "",
+        description: "",
+      });
+    } catch (error) {
+      setMessage("Une erreur est survenue. Veuillez réessayer.");
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -44,7 +91,7 @@ export default function Denoncer() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <form className="space-y-5">
+          <form onSubmit={handleSubmit} className="space-y-5">
             <div>
               <label className="block font-bold mb-1">
                 Pseudonyme <span className="text-red-500">*</span>
@@ -55,7 +102,6 @@ export default function Denoncer() {
                 value={formData.pseudonyme}
                 onChange={handleChange}
                 className="w-full p-2 border border-gray-400 rounded-md focus:border-black focus:ring-black outline-none"
-                required
               />
             </div>
 
@@ -95,7 +141,7 @@ export default function Denoncer() {
             <div className="flex space-x-2">
               <div className="flex-1">
                 <label className="block font-bold mb-1">
-                  Mots-clés <span className="text-red-500">*</span>
+                  Mots-clés (séparés par des virgules) <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
@@ -147,69 +193,19 @@ export default function Denoncer() {
               />
             </div>
 
-            {/* Upload Pièces jointes */}
-            <div>
-              <label className="block font-bold mb-1">Pièces jointes</label>
-              <button
-                type="button"
-                className="p-2 border border-gray-400 rounded-md focus:border-black focus:ring-black outline-none"
-              >
-                Ajouter
-              </button>
-            </div>
-
             <motion.button
               type="submit"
               className="w-full bg-black text-white p-3 rounded-md font-bold"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              disabled={loading}
             >
-              DÉNONCERRRRR
+              {loading ? "Envoi en cours..." : "DÉNONCERRRRR"}
             </motion.button>
           </form>
+          {message && <p className="text-center text-green-600 mt-4">{message}</p>}
         </motion.div>
-
-        {/* Texte en bas */}
-        <div className="mt-8 text-center text-gray-600 space-y-2">
-          <p>
-            🔒 <span className="font-semibold">Anonymat garanti</span> : Vos
-            signalements restent totalement anonymes et vos données sont
-            traitées avec la plus grande confidentialité.
-          </p>
-          <p>
-            🛡️ <span className="font-semibold">Sécurité renforcée</span> :
-            Toutes les informations sont cryptées et protégées pour assurer
-            votre tranquillité d&apos;esprit.
-          </p>
-        </div>
       </main>
-
-      <footer className="bg-background border-t mt-auto">
-        <div className="container py-6">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <h2 className="font-bold">Poukave</h2>
-            <div className="flex gap-4">
-              {[
-                "Confidentialité",
-                "Conditions d'utilisation",
-                "FAQ",
-                "Contact",
-              ].map((link, index) => (
-                <a
-                  key={index}
-                  href="#"
-                  className="text-sm text-muted-foreground hover:underline"
-                >
-                  {link}
-                </a>
-              ))}
-            </div>
-            <p className="text-sm text-muted-foreground">
-              © {new Date().getFullYear()} Poukave. Tous droits réservés.
-            </p>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }
