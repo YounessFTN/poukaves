@@ -17,13 +17,14 @@ export function NavBar() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background">
-      <div className="container flex items-center justify-between p-4">
+    <header className="flex items-center justify-between sticky top-0 z-50 w-full border-b bg-background">
+      <div className="container flex items-center justify-between mx-auto p-4">
+        {" "}
+        {/* Centrage ici */}
         {/* Logo */}
         <div className="flex items-center gap-2">
           <h1 className="text-xl font-bold">Poukave</h1>
         </div>
-
         {/* Mobile menu toggle */}
         <Button
           variant="ghost"
@@ -34,9 +35,8 @@ export function NavBar() {
         >
           {isMenuOpen ? <X /> : <Menu />}
         </Button>
-
         {/* Desktop navigation */}
-        <nav className="hidden items-center gap-4 lg:flex">
+        <nav className="hidden lg:flex items-center gap-4">
           {navLinks.map((link) => (
             <Link href={link.href} key={link.href}>
               <Button variant="ghost" size="sm">
@@ -52,7 +52,6 @@ export function NavBar() {
             </ShimmerButton>
           </Link>
         </nav>
-
         {/* Mobile menu overlay */}
         {isMenuOpen && (
           <div className="absolute left-0 top-full z-50 w-full bg-background shadow-lg lg:hidden">
