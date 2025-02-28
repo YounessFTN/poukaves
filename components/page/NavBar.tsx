@@ -23,7 +23,9 @@ export function NavBar() {
         {/* Centrage ici */}
         {/* Logo */}
         <div className="flex items-center gap-2">
-          <h1 className="text-xl font-bold">Poukave</h1>
+          <Link href="/">
+            <h1 className="text-xl font-bold">Poukave</h1>
+          </Link>
         </div>
         {/* Mobile menu toggle */}
         <Button

@@ -1,6 +1,5 @@
 "use client";
 
-import { NavBar } from "@/components/page/NavBar";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -154,7 +153,6 @@ export default function Statistiques() {
 
   return (
     <div className="flex flex-col min-h-screen bg-white">
-      <NavBar />
       <main className="flex-grow container mx-auto px-3 py-4 sm:px-4 sm:py-8 relative z-10">
         <motion.div
           className="text-2xl sm:text-3xl font-bold text-center mt-4 mb-6 sm:mt-8 sm:mb-10 tracking-tight"

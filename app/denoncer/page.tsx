@@ -1,7 +1,6 @@
 "use client";
 
 import { DotPattern } from "@/components/magicui/dot-pattern";
-import { NavBar } from "@/components/page/NavBar";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
@@ -73,7 +72,7 @@ export default function Denoncer() {
   return (
     <div className="p-4 flex flex-col min-h-screen">
       <DotPattern className="[mask-image:radial-gradient(300px_circle_at_center,white,transparent)]" />
-      <NavBar />
+
       <main className="flex-grow p-4 flex flex-col items-center">
         <h1 className="text-4xl font-bold text-center mt-8">
           Ça dénonce hein 😉

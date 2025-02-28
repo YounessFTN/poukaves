@@ -12,8 +12,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
-import { NavBar } from "@/components/page/NavBar";
-
 export default function Home() {
   return (
     <div className="p-4 place-content-between flex justify-items-center flex-col min-h-screen">
@@ -24,25 +22,25 @@ export default function Home() {
         )}
       />
 
-      <NavBar />
-
       {/* Hero Section */}
-      <section className="place-content-between flex justify-items-center flex-col container py-12 sm:py-16 space-y-6 md:space-y-8">
+      <section className="place-content-between flex justify-items-center flex-col container py-8 sm:py-16 space-y-4 md:space-y-8">
         <div className="max-w-xl mx-auto text-center">
-          <h2 className="text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl">
+          <h2 className="text-xl font-bold tracking-tight sm:text-2xl md:text-4xl">
             Poukave - Signalez pour un avenir meilleur
           </h2>
-          <p className="mt-4 text-lg text-muted-foreground">
+          <p className="mt-3 md:mt-4 text-base md:text-lg text-muted-foreground">
             Une plateforme anonyme et sécurisée pour signaler les problèmes
             sociaux, environnementaux et civiques qui affectent notre
             communauté.
           </p>
-          <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/denoncer">
-              <Button size="lg">Faire un signalement</Button>
+          <div className="mt-4 md:mt-6 flex flex-col sm:flex-row gap-3 justify-center">
+            <Link href="/denoncer" className="w-full sm:w-auto">
+              <Button size="lg" className="w-full sm:w-auto">
+                Faire un signalement
+              </Button>
             </Link>
-            <Link href="/statistiques">
-              <Button size="lg" variant="outline">
+            <Link href="/statistiques" className="w-full sm:w-auto">
+              <Button size="lg" variant="outline" className="w-full sm:w-auto">
                 Voir les analyses
               </Button>
             </Link>
@@ -51,8 +49,8 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section className="place-content-between flex justify-items-center flex-col container py-8 md:py-12">
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <section className="place-content-between flex justify-items-center flex-col container py-6 md:py-12">
+        <div className="grid grid-cols-1 gap-4 md:gap-6 md:grid-cols-2 lg:grid-cols-3">
           {[
             {
               title: "Anonymat Garanti",
@@ -83,18 +81,22 @@ export default function Home() {
             },
           ].map((feature, index) => (
             <Card key={index}>
-              <CardHeader>
-                <CardTitle>{feature.title}</CardTitle>
-                <CardDescription>{feature.description}</CardDescription>
+              <CardHeader className="p-4 md:p-6">
+                <CardTitle className="text-lg md:text-xl">
+                  {feature.title}
+                </CardTitle>
+                <CardDescription className="text-sm md:text-base">
+                  {feature.description}
+                </CardDescription>
               </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">
+              <CardContent className="p-4 pt-0 md:p-6 md:pt-0">
+                <p className="text-xs md:text-sm text-muted-foreground">
                   {feature.content}
                 </p>
               </CardContent>
-              <CardFooter>
-                <Link href={feature.href}>
-                  <Button variant="outline" size="sm">
+              <CardFooter className="p-4 md:p-6">
+                <Link href={feature.href} className="w-full">
+                  <Button variant="outline" size="sm" className="w-full">
                     {feature.buttonText}
                   </Button>
                 </Link>
@@ -104,16 +106,31 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Tabs Section */}
-      <section className="place-content-between flex justify-items-center flex-col container py-8 md:py-12">
-        <h2 className="text-2xl font-bold tracking-tight text-center mb-8">
+      {/* Improved Tabs Section for Mobile */}
+      <section className="place-content-between flex justify-items-center flex-col container py-6 md:py-12">
+        <h2 className="text-xl md:text-2xl font-bold tracking-tight text-center mb-4 md:mb-8">
           Comment utiliser Poukave
         </h2>
-        <Tabs defaultValue="signaler" className="max-w-xl mx-auto">
-          <TabsList className="grid w-full grid-cols-1 sm:grid-cols-3">
-            <TabsTrigger value="signaler">Signaler</TabsTrigger>
-            <TabsTrigger value="categories">Catégories</TabsTrigger>
-            <TabsTrigger value="analyse">Analyse</TabsTrigger>
+        <Tabs defaultValue="signaler" className="w-full max-w-xl mx-auto">
+          <TabsList className="grid w-full grid-cols-3 h-auto">
+            <TabsTrigger
+              value="signaler"
+              className="px-2 py-2 text-xs md:text-base"
+            >
+              Signaler
+            </TabsTrigger>
+            <TabsTrigger
+              value="categories"
+              className="px-2 py-2 text-xs md:text-base"
+            >
+              Catégories
+            </TabsTrigger>
+            <TabsTrigger
+              value="analyse"
+              className="px-2 py-2 text-xs md:text-base"
+            >
+              Analyse
+            </TabsTrigger>
           </TabsList>
           {[
             {
@@ -121,7 +138,7 @@ export default function Home() {
               title: "Comment faire un signalement",
               description:
                 "Cliquez sur le bouton 'Dénoncer', remplissez le formulaire avec une description du problème, sa catégorie et sa localisation, puis soumettez-le de manière anonyme.",
-              buttonText: "Faire un signalement maintenant",
+              buttonText: "Faire un signalement",
               href: "/denoncer",
             },
             {
@@ -129,7 +146,7 @@ export default function Home() {
               title: "Nos catégories de signalement",
               description:
                 "Fraude, corruption, pollution environnementale, problèmes d'infrastructure, incivilités, et bien plus. Choisissez la catégorie qui correspond le mieux au problème.",
-              buttonText: "Voir toutes les catégories",
+              buttonText: "Voir les catégories",
               href: "/categories",
             },
             {
@@ -137,19 +154,23 @@ export default function Home() {
               title: "Comprendre les données",
               description:
                 "Consultez notre page d'analyse pour voir les statistiques, la répartition par catégorie, et les zones géographiques les plus signalées. Des graphiques interactifs sont disponibles.",
-              buttonText: "Consulter les analyses",
+              buttonText: "Voir les analyses",
               href: "/statistiques",
             },
           ].map((tab) => (
             <TabsContent
               key={tab.value}
               value={tab.value}
-              className="mt-4 p-4 border rounded-lg"
+              className="mt-3 p-3 md:p-4 border rounded-lg"
             >
-              <h3 className="text-lg font-medium mb-2">{tab.title}</h3>
-              <p className="text-muted-foreground mb-4">{tab.description}</p>
-              <Link href={tab.href}>
-                <Button>{tab.buttonText}</Button>
+              <h3 className="text-base md:text-lg font-medium mb-2">
+                {tab.title}
+              </h3>
+              <p className="text-xs md:text-sm text-muted-foreground mb-3 md:mb-4">
+                {tab.description}
+              </p>
+              <Link href={tab.href} className="w-full block">
+                <Button className="w-full text-sm">{tab.buttonText}</Button>
               </Link>
             </TabsContent>
           ))}
@@ -157,23 +178,25 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="place-content-between flex justify-items-center flex-col bg-muted py-8 md:py-12">
-        <div className="container">
+      <section className="place-content-between flex justify-items-center flex-col bg-muted py-6 md:py-12">
+        <div className="container px-4">
           <div className="max-w-lg mx-auto text-center">
-            <h2 className="text-2xl font-bold tracking-tight mb-4">
+            <h2 className="text-xl md:text-2xl font-bold tracking-tight mb-3 md:mb-4">
               Ensemble, créons une communauté plus transparente
             </h2>
-            <p className="text-muted-foreground mb-6">
+            <p className="text-sm md:text-base text-muted-foreground mb-4 md:mb-6">
               Votre vigilance et vos signalements sont essentiels pour améliorer
               notre société. Rejoignez notre mouvement pour plus de transparence
               et de responsabilité.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/denoncer">
-                <Button size="lg">Faire un signalement</Button>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Link href="/denoncer" className="w-full sm:w-auto">
+                <Button size="lg" className="w-full">
+                  Faire un signalement
+                </Button>
               </Link>
-              <Link href="/ressources">
-                <Button size="lg" variant="outline">
+              <Link href="/ressources" className="w-full sm:w-auto">
+                <Button size="lg" variant="outline" className="w-full">
                   Consulter les ressources
                 </Button>
               </Link>
@@ -184,28 +207,28 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="place-content-between flex justify-items-center flex-col bg-background border-t mt-auto">
-        <div className="container py-6">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="container py-4 md:py-6">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-3 md:gap-4">
             <div className="flex items-center gap-2">
               <Link href="/">
                 <h2 className="font-bold">Poukave</h2>
               </Link>
             </div>
-            <div className="flex gap-4">
+            <div className="flex flex-wrap justify-center gap-3 my-2 md:my-0">
               {[
                 { label: "Confidentialité", href: "/confidentialite" },
-                { label: "Conditions d'utilisation", href: "/conditions" },
+                { label: "Conditions", href: "/conditions" },
                 { label: "FAQ", href: "/faq" },
                 { label: "Contact", href: "/contact" },
               ].map((link, index) => (
                 <Link key={index} href={link.href}>
-                  <span className="text-sm text-muted-foreground hover:underline">
+                  <span className="text-xs md:text-sm text-muted-foreground hover:underline">
                     {link.label}
                   </span>
                 </Link>
               ))}
             </div>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-xs md:text-sm text-muted-foreground">
               © 2025 Poukave. Tous droits réservés.
             </p>
           </div>

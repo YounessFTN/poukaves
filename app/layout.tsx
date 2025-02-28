@@ -1,3 +1,4 @@
+import { NavBar } from "@/components/page/NavBar";
 import { Geist, Geist_Mono } from "next/font/google";
 import { FC } from "react";
 import "./globals.css";
@@ -43,6 +44,7 @@ const RootLayout: FC<{ children: React.ReactNode }> = ({ children }) => {
           alignItems: "center",
         }}
       >
+        {<NavBar />}
         {children}
       </body>
     </html>
