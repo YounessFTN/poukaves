@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 import { NavBar } from "@/components/page/NavBar";
 
@@ -26,7 +27,7 @@ export default function Home() {
       <NavBar />
 
       {/* Hero Section */}
-      <section className=" place-content-between flex justify-items-center flex-col container py-12 sm:py-16 space-y-6 md:space-y-8">
+      <section className="place-content-between flex justify-items-center flex-col container py-12 sm:py-16 space-y-6 md:space-y-8">
         <div className="max-w-xl mx-auto text-center">
           <h2 className="text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl">
             Poukave - Signalez pour un avenir meilleur
@@ -37,16 +38,20 @@ export default function Home() {
             communauté.
           </p>
           <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg">Faire un signalement</Button>
-            <Button size="lg" variant="outline">
-              Voir les analyses
-            </Button>
+            <Link href="/denoncer">
+              <Button size="lg">Faire un signalement</Button>
+            </Link>
+            <Link href="/statistiques">
+              <Button size="lg" variant="outline">
+                Voir les analyses
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section className=" place-content-between flex justify-items-center flex-col container py-8 md:py-12">
+      <section className="place-content-between flex justify-items-center flex-col container py-8 md:py-12">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {[
             {
@@ -56,6 +61,7 @@ export default function Home() {
               content:
                 "Notre plateforme est conçue pour protéger votre identité tout en permettant de transmettre des informations cruciales.",
               buttonText: "En savoir plus",
+              href: "/a-propos#anonymat",
             },
             {
               title: "Impact Concret",
@@ -64,6 +70,7 @@ export default function Home() {
               content:
                 "Grâce à la visualisation des données et à la transparence, les autorités peuvent agir efficacement sur les problèmes signalés.",
               buttonText: "Voir les résultats",
+              href: "/statistiques",
             },
             {
               title: "Facilité d'Utilisation",
@@ -72,6 +79,7 @@ export default function Home() {
               content:
                 "Notre formulaire intuitif vous permet de déposer un signalement en quelques minutes, avec la possibilité d'ajouter des détails précis.",
               buttonText: "Comment ça marche",
+              href: "/guide",
             },
           ].map((feature, index) => (
             <Card key={index}>
@@ -85,9 +93,11 @@ export default function Home() {
                 </p>
               </CardContent>
               <CardFooter>
-                <Button variant="outline" size="sm">
-                  {feature.buttonText}
-                </Button>
+                <Link href={feature.href}>
+                  <Button variant="outline" size="sm">
+                    {feature.buttonText}
+                  </Button>
+                </Link>
               </CardFooter>
             </Card>
           ))}
@@ -95,7 +105,7 @@ export default function Home() {
       </section>
 
       {/* Tabs Section */}
-      <section className=" place-content-between flex justify-items-center flex-col container py-8 md:py-12">
+      <section className="place-content-between flex justify-items-center flex-col container py-8 md:py-12">
         <h2 className="text-2xl font-bold tracking-tight text-center mb-8">
           Comment utiliser Poukave
         </h2>
@@ -112,6 +122,7 @@ export default function Home() {
               description:
                 "Cliquez sur le bouton 'Dénoncer', remplissez le formulaire avec une description du problème, sa catégorie et sa localisation, puis soumettez-le de manière anonyme.",
               buttonText: "Faire un signalement maintenant",
+              href: "/denoncer",
             },
             {
               value: "categories",
@@ -119,6 +130,7 @@ export default function Home() {
               description:
                 "Fraude, corruption, pollution environnementale, problèmes d'infrastructure, incivilités, et bien plus. Choisissez la catégorie qui correspond le mieux au problème.",
               buttonText: "Voir toutes les catégories",
+              href: "/categories",
             },
             {
               value: "analyse",
@@ -126,6 +138,7 @@ export default function Home() {
               description:
                 "Consultez notre page d'analyse pour voir les statistiques, la répartition par catégorie, et les zones géographiques les plus signalées. Des graphiques interactifs sont disponibles.",
               buttonText: "Consulter les analyses",
+              href: "/statistiques",
             },
           ].map((tab) => (
             <TabsContent
@@ -135,14 +148,16 @@ export default function Home() {
             >
               <h3 className="text-lg font-medium mb-2">{tab.title}</h3>
               <p className="text-muted-foreground mb-4">{tab.description}</p>
-              <Button>{tab.buttonText}</Button>
+              <Link href={tab.href}>
+                <Button>{tab.buttonText}</Button>
+              </Link>
             </TabsContent>
           ))}
         </Tabs>
       </section>
 
       {/* CTA Section */}
-      <section className=" place-content-between flex justify-items-center flex-col bg-muted py-8 md:py-12">
+      <section className="place-content-between flex justify-items-center flex-col bg-muted py-8 md:py-12">
         <div className="container">
           <div className="max-w-lg mx-auto text-center">
             <h2 className="text-2xl font-bold tracking-tight mb-4">
@@ -154,36 +169,40 @@ export default function Home() {
               et de responsabilité.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg">Faire un signalement</Button>
-              <Button size="lg" variant="outline">
-                Consulter les ressources
-              </Button>
+              <Link href="/denoncer">
+                <Button size="lg">Faire un signalement</Button>
+              </Link>
+              <Link href="/ressources">
+                <Button size="lg" variant="outline">
+                  Consulter les ressources
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className=" place-content-between flex justify-items-center flex-col bg-background border-t mt-auto">
+      <footer className="place-content-between flex justify-items-center flex-col bg-background border-t mt-auto">
         <div className="container py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="flex items-center gap-2">
-              <h2 className="font-bold">Poukave</h2>
+              <Link href="/">
+                <h2 className="font-bold">Poukave</h2>
+              </Link>
             </div>
             <div className="flex gap-4">
               {[
-                "Confidentialité",
-                "Conditions d'utilisation",
-                "FAQ",
-                "Contact",
+                { label: "Confidentialité", href: "/confidentialite" },
+                { label: "Conditions d'utilisation", href: "/conditions" },
+                { label: "FAQ", href: "/faq" },
+                { label: "Contact", href: "/contact" },
               ].map((link, index) => (
-                <a
-                  key={index}
-                  href="#"
-                  className="text-sm text-muted-foreground hover:underline"
-                >
-                  {link}
-                </a>
+                <Link key={index} href={link.href}>
+                  <span className="text-sm text-muted-foreground hover:underline">
+                    {link.label}
+                  </span>
+                </Link>
               ))}
             </div>
             <p className="text-sm text-muted-foreground">
