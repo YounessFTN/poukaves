@@ -1,6 +1,5 @@
 "use client";
 
-import { DotPattern } from "@/components/magicui/dot-pattern";
 import { NavBar } from "@/components/page/NavBar";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -123,20 +122,23 @@ export default function Statistiques() {
       });
   }, []);
 
-  const COLORS = [
-    "#4CAF50",
-    "#03A9F4",
-    "#FFC107",
-    "#8BC34A",
-    "#F44336",
-    "#9C27B0",
-    "#673AB7",
-    "#3F51B5",
+  // Monochrome palette for professional B&W design
+  const MONOCHROME_COLORS = [
+    "#000000",
+    "#333333",
+    "#555555",
+    "#777777",
+    "#999999",
+    "#BBBBBB",
+    "#DDDDDD",
+    "#EEEEEE",
   ];
 
   const getCategoryColor = (category: string) => {
     const index = categoriesData.findIndex((item) => item.name === category);
-    return index >= 0 ? COLORS[index % COLORS.length] : "#gray";
+    return index >= 0
+      ? MONOCHROME_COLORS[index % MONOCHROME_COLORS.length]
+      : "#CCCCCC";
   };
 
   const LoadingState = () => (
@@ -151,21 +153,17 @@ export default function Statistiques() {
   );
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50">
-      <DotPattern
-        glow
-        className="fixed inset-0 opacity-50 [mask-image:radial-gradient(400px_circle_at_center,white,transparent)]"
-      />
+    <div className="flex flex-col min-h-screen bg-white">
       <NavBar />
       <main className="flex-grow container mx-auto px-3 py-4 sm:px-4 sm:py-8 relative z-10">
-        <motion.h1
-          className="text-2xl sm:text-4xl font-bold text-center mt-4 mb-6 sm:mt-8 sm:mb-10"
+        <motion.div
+          className="text-2xl sm:text-3xl font-bold text-center mt-4 mb-6 sm:mt-8 sm:mb-10 tracking-tight"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
         >
-          📊 Statistiques des Signalements
-        </motion.h1>
+          Statistiques des Signalements
+        </motion.div>
 
         {loading ? (
           <LoadingState />
@@ -177,18 +175,15 @@ export default function Statistiques() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
             >
-              <Card className="overflow-hidden border-2 border-primary/20 shadow-md">
+              <Card className="overflow-hidden border border-gray-200 shadow-sm">
                 <CardContent className="p-4 sm:p-6">
                   <div className="flex items-center justify-center">
-                    <span className="text-3xl sm:text-4xl mr-3 sm:mr-4">
-                      🚨
-                    </span>
                     <div>
-                      <h2 className="text-2xl sm:text-3xl font-bold text-primary">
-                        {totalReports}
+                      <h2 className="text-2xl sm:text-3xl font-bold text-black text-center">
+                        {totalReports.toLocaleString()}
                       </h2>
-                      <p className="text-sm sm:text-base text-muted-foreground">
-                        signalements enregistrés
+                      <p className="text-sm sm:text-base text-gray-600 text-center uppercase tracking-wide">
+                        Signalements enregistrés
                       </p>
                     </div>
                   </div>
@@ -196,16 +191,16 @@ export default function Statistiques() {
               </Card>
             </motion.div>
 
-            <div className="grid grid-cols-1 gap-6 mb-6 sm:gap-8 sm:mb-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 sm:gap-8 sm:mb-10">
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
-                <Card className="shadow-md border-2 border-primary/10">
-                  <CardHeader className="p-4 pb-2 sm:p-6 sm:pb-3">
-                    <CardTitle className="text-lg sm:text-xl flex items-center">
-                      <span className="mr-2">📌</span> Répartition par Catégorie
+                <Card className="shadow-sm border border-gray-200">
+                  <CardHeader className="p-4 pb-2 sm:p-6 sm:pb-3 border-b border-gray-100">
+                    <CardTitle className="text-sm sm:text-base uppercase tracking-wider text-gray-700">
+                      Répartition par Catégorie
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="p-2 sm:p-6">
@@ -231,7 +226,11 @@ export default function Statistiques() {
                             {categoriesData.map((entry, index) => (
                               <Cell
                                 key={`cell-${index}`}
-                                fill={COLORS[index % COLORS.length]}
+                                fill={
+                                  MONOCHROME_COLORS[
+                                    index % MONOCHROME_COLORS.length
+                                  ]
+                                }
                               />
                             ))}
                           </Pie>
@@ -240,6 +239,10 @@ export default function Statistiques() {
                               `${value} signalements`,
                               name,
                             ]}
+                            contentStyle={{
+                              backgroundColor: "white",
+                              border: "1px solid #e2e8f0",
+                            }}
                           />
                         </PieChart>
                       </ResponsiveContainer>
@@ -248,10 +251,7 @@ export default function Statistiques() {
                       {categoriesData.slice(0, 3).map((category, index) => (
                         <Badge
                           key={index}
-                          className="text-xs whitespace-nowrap"
-                          style={{
-                            backgroundColor: COLORS[index % COLORS.length],
-                          }}
+                          className="text-xs whitespace-nowrap bg-black text-white hover:bg-gray-800"
                         >
                           {category.name.length > 12
                             ? category.name.substring(0, 12) + "..."
@@ -269,19 +269,23 @@ export default function Statistiques() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.3 }}
               >
-                <Card className="shadow-md border-2 border-primary/10">
-                  <CardHeader className="p-4 pb-2 sm:p-6 sm:pb-3">
-                    <CardTitle className="text-lg sm:text-xl flex items-center">
-                      <span className="mr-2">🏙️</span> Top Localisations
+                <Card className="shadow-sm border border-gray-200">
+                  <CardHeader className="p-4 pb-2 sm:p-6 sm:pb-3 border-b border-gray-100">
+                    <CardTitle className="text-sm sm:text-base uppercase tracking-wider text-gray-700">
+                      Top Localisations
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="p-2 sm:p-6">
                     <div className="overflow-x-auto -mx-2 px-2">
                       <table className="w-full text-xs sm:text-sm">
                         <thead>
-                          <tr className="border-b">
-                            <th className="text-left py-2">Ville</th>
-                            <th className="text-right py-2">Signalements</th>
+                          <tr className="border-b border-gray-200">
+                            <th className="text-left py-2 font-medium text-gray-600 uppercase tracking-wider">
+                              Ville
+                            </th>
+                            <th className="text-right py-2 font-medium text-gray-600 uppercase tracking-wider">
+                              Signalements
+                            </th>
                           </tr>
                         </thead>
                         <tbody>
@@ -310,10 +314,10 @@ export default function Statistiques() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
             >
-              <Card className="shadow-md border-2 border-primary/10">
-                <CardHeader className="p-4 pb-2 sm:p-6 sm:pb-3">
-                  <CardTitle className="text-lg sm:text-xl flex items-center">
-                    <span className="mr-2">📈</span> Évolution des Signalements
+              <Card className="shadow-sm border border-gray-200">
+                <CardHeader className="p-4 pb-2 sm:p-6 sm:pb-3 border-b border-gray-100">
+                  <CardTitle className="text-sm sm:text-base uppercase tracking-wider text-gray-700">
+                    Évolution des Signalements
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="p-2 sm:p-6">
@@ -328,7 +332,7 @@ export default function Statistiques() {
                           angle={-45}
                           textAnchor="end"
                           height={60}
-                          tick={{ fontSize: 10 }}
+                          tick={{ fontSize: 10, fill: "#666" }}
                           tickFormatter={(value) => {
                             // For mobile, shorten the month names
                             const parts = value.split(" ");
@@ -338,23 +342,33 @@ export default function Statistiques() {
                             return value;
                           }}
                         />
-                        <YAxis tick={{ fontSize: 10 }} />
+                        <YAxis tick={{ fontSize: 10, fill: "#666" }} />
                         <Tooltip
                           formatter={(value) => [
                             `${value} signalements`,
                             "Total",
                           ]}
+                          contentStyle={{
+                            backgroundColor: "white",
+                            border: "1px solid #e2e8f0",
+                          }}
                         />
                         <Line
                           type="monotone"
                           dataKey="signalements"
-                          stroke="#FF5733"
+                          stroke="#000000"
                           strokeWidth={2}
-                          dot={{ stroke: "#FF5733", strokeWidth: 2, r: 3 }}
+                          dot={{
+                            stroke: "#000000",
+                            strokeWidth: 2,
+                            r: 3,
+                            fill: "white",
+                          }}
                           activeDot={{
-                            stroke: "#FF5733",
+                            stroke: "#000000",
                             strokeWidth: 2,
                             r: 5,
+                            fill: "white",
                           }}
                         />
                       </LineChart>
@@ -369,18 +383,18 @@ export default function Statistiques() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.5 }}
             >
-              <Card className="shadow-md border-2 border-primary/10">
-                <CardHeader className="p-4 pb-2 sm:p-6 sm:pb-3">
-                  <CardTitle className="text-lg sm:text-xl flex items-center">
-                    <span className="mr-2">📍</span> Détails des Signalements
+              <Card className="shadow-sm border border-gray-200">
+                <CardHeader className="p-4 pb-2 sm:p-6 sm:pb-3 border-b border-gray-100">
+                  <CardTitle className="text-sm sm:text-base uppercase tracking-wider text-gray-700">
+                    Détails des Signalements
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="p-2 sm:p-6">
                   <Tabs defaultValue="all" className="w-full">
-                    <TabsList className="mb-4 overflow-x-auto flex whitespace-nowrap max-w-full pb-1">
+                    <TabsList className="mb-4 overflow-x-auto flex whitespace-nowrap max-w-full pb-1 bg-gray-100">
                       <TabsTrigger
                         value="all"
-                        className="text-xs sm:text-sm px-2 sm:px-4"
+                        className="text-xs sm:text-sm px-2 sm:px-4 data-[state=active]:bg-black data-[state=active]:text-white"
                       >
                         Tous
                       </TabsTrigger>
@@ -388,7 +402,7 @@ export default function Statistiques() {
                         <TabsTrigger
                           key={idx}
                           value={cat.name}
-                          className="text-xs sm:text-sm px-2 sm:px-4"
+                          className="text-xs sm:text-sm px-2 sm:px-4 data-[state=active]:bg-black data-[state=active]:text-white"
                         >
                           {cat.name.length > 10
                             ? cat.name.substring(0, 10) + "..."
@@ -401,17 +415,17 @@ export default function Statistiques() {
                       <div className="overflow-x-auto -mx-2 px-2">
                         <table className="w-full border-collapse text-xs sm:text-sm">
                           <thead>
-                            <tr className="bg-gray-100 text-gray-700">
-                              <th className="border border-gray-200 px-2 sm:px-4 py-1.5 sm:py-2 text-left">
+                            <tr className="bg-gray-50 text-gray-600 uppercase tracking-wider text-xs">
+                              <th className="border-b border-gray-200 px-2 sm:px-4 py-1.5 sm:py-2 text-left font-medium">
                                 Ville
                               </th>
-                              <th className="border border-gray-200 px-2 sm:px-4 py-1.5 sm:py-2 text-left">
+                              <th className="border-b border-gray-200 px-2 sm:px-4 py-1.5 sm:py-2 text-left font-medium">
                                 Cat.
                               </th>
-                              <th className="border border-gray-200 px-2 sm:px-4 py-1.5 sm:py-2 text-left">
+                              <th className="border-b border-gray-200 px-2 sm:px-4 py-1.5 sm:py-2 text-left font-medium">
                                 Date
                               </th>
-                              <th className="border border-gray-200 px-2 sm:px-4 py-1.5 sm:py-2 text-left">
+                              <th className="border-b border-gray-200 px-2 sm:px-4 py-1.5 sm:py-2 text-left font-medium">
                                 Description
                               </th>
                             </tr>
@@ -422,28 +436,23 @@ export default function Statistiques() {
                                 key={index}
                                 className="hover:bg-gray-50 border-b border-gray-100"
                               >
-                                <td className="border border-gray-200 px-2 sm:px-4 py-1.5 sm:py-2">
+                                <td className="px-2 sm:px-4 py-1.5 sm:py-2">
                                   {report.localisation.length > 12
                                     ? report.localisation.substring(0, 12) +
                                       "..."
                                     : report.localisation}
                                 </td>
-                                <td className="border border-gray-200 px-2 sm:px-4 py-1.5 sm:py-2">
+                                <td className="px-2 sm:px-4 py-1.5 sm:py-2">
                                   <Badge
-                                    className="font-normal text-2xs sm:text-xs px-1.5"
-                                    style={{
-                                      backgroundColor: getCategoryColor(
-                                        report.categorie
-                                      ),
-                                      color: "white",
-                                    }}
+                                    className="font-normal text-2xs sm:text-xs px-1.5 bg-gray-900 text-white hover:bg-black"
+                                    variant="outline"
                                   >
                                     {report.categorie.length > 8
                                       ? report.categorie.substring(0, 8) + "..."
                                       : report.categorie}
                                   </Badge>
                                 </td>
-                                <td className="border border-gray-200 px-2 sm:px-4 py-1.5 sm:py-2">
+                                <td className="px-2 sm:px-4 py-1.5 sm:py-2 text-gray-600">
                                   {new Date(report.date).toLocaleDateString(
                                     "fr-FR",
                                     {
@@ -453,7 +462,7 @@ export default function Statistiques() {
                                     }
                                   )}
                                 </td>
-                                <td className="border border-gray-200 px-2 sm:px-4 py-1.5 sm:py-2 truncate max-w-32 sm:max-w-none">
+                                <td className="px-2 sm:px-4 py-1.5 sm:py-2 truncate max-w-32 sm:max-w-none">
                                   {report.description.length > 20
                                     ? report.description.substring(0, 20) +
                                       "..."
@@ -475,14 +484,14 @@ export default function Statistiques() {
                         <div className="overflow-x-auto -mx-2 px-2">
                           <table className="w-full border-collapse text-xs sm:text-sm">
                             <thead>
-                              <tr className="bg-gray-100 text-gray-700">
-                                <th className="border border-gray-200 px-2 sm:px-4 py-1.5 sm:py-2 text-left">
+                              <tr className="bg-gray-50 text-gray-600 uppercase tracking-wider text-xs">
+                                <th className="border-b border-gray-200 px-2 sm:px-4 py-1.5 sm:py-2 text-left font-medium">
                                   Ville
                                 </th>
-                                <th className="border border-gray-200 px-2 sm:px-4 py-1.5 sm:py-2 text-left">
+                                <th className="border-b border-gray-200 px-2 sm:px-4 py-1.5 sm:py-2 text-left font-medium">
                                   Date
                                 </th>
-                                <th className="border border-gray-200 px-2 sm:px-4 py-1.5 sm:py-2 text-left">
+                                <th className="border-b border-gray-200 px-2 sm:px-4 py-1.5 sm:py-2 text-left font-medium">
                                   Description
                                 </th>
                               </tr>
@@ -498,13 +507,13 @@ export default function Statistiques() {
                                     key={index}
                                     className="hover:bg-gray-50 border-b border-gray-100"
                                   >
-                                    <td className="border border-gray-200 px-2 sm:px-4 py-1.5 sm:py-2">
+                                    <td className="px-2 sm:px-4 py-1.5 sm:py-2">
                                       {report.localisation.length > 12
                                         ? report.localisation.substring(0, 12) +
                                           "..."
                                         : report.localisation}
                                     </td>
-                                    <td className="border border-gray-200 px-2 sm:px-4 py-1.5 sm:py-2">
+                                    <td className="px-2 sm:px-4 py-1.5 sm:py-2 text-gray-600">
                                       {new Date(report.date).toLocaleDateString(
                                         "fr-FR",
                                         {
@@ -514,7 +523,7 @@ export default function Statistiques() {
                                         }
                                       )}
                                     </td>
-                                    <td className="border border-gray-200 px-2 sm:px-4 py-1.5 sm:py-2 truncate max-w-32 sm:max-w-none">
+                                    <td className="px-2 sm:px-4 py-1.5 sm:py-2 truncate max-w-32 sm:max-w-none">
                                       {report.description.length > 20
                                         ? report.description.substring(0, 20) +
                                           "..."
@@ -534,8 +543,8 @@ export default function Statistiques() {
           </>
         )}
       </main>
-      <footer className="bg-white border-t mt-auto w-full py-4 sm:py-6 px-4 sm:px-6 text-center">
-        <p className="text-xs sm:text-sm text-muted-foreground">
+      <footer className="bg-white border-t border-gray-200 mt-auto w-full py-4 sm:py-6 px-4 sm:px-6 text-center">
+        <p className="text-xs sm:text-sm text-gray-500">
           © {new Date().getFullYear()} Poukave. Tous droits réservés.
         </p>
       </footer>
